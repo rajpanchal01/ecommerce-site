@@ -4,19 +4,19 @@ module Api
 
         def index
           @categories = MainCategory.order('created_at DESC')
-          render json: {status: 'SUCCESS', message: 'Loaded Categories', data:@categories}, status: :ok
+          render json: @categories, status: :ok
         end
 
         def show
           @category = MainCategory.find(params[:id])
-          render json: {status: 'SUCCESS', message: 'Loaded Categories', data:@category}, status: :ok
+          render json: @category, status: :ok
         end
 
         def create
           @category = MainCategory.new(category_params)
 
           if @category.save
-            render json: {status: 'SUCCESS', message: 'categories is saved', data:@category}, status: :ok
+            render json: @category, status: :ok
           else
             render json: {status: 'Error', message: 'Categories is not saved', data:@category.errors}, status: :unprocessable_entity
           end
@@ -41,7 +41,7 @@ module Api
 
         private
           def category_params
-            params.permit(:name, :about)
+            params.permit(:name, :about,:image)
           end
 
       end

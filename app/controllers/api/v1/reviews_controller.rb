@@ -53,7 +53,7 @@ module Api
 
         # Only allow a list of trusted parameters through.
         def review_params
-          params.permit(:review_header,:review_content,:product_id,:user_id,:rating)
+          params.permit(:review_header,:review_content,:product_id,:user_id,:rating,review_images: [])
         end
       end
   end 

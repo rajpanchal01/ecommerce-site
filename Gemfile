@@ -43,3 +43,4 @@ gem "sprockets", "<4"
 gem "activeadmin"
 gem 'sass-rails'
 gem 'devise'
+gem "active_model_serializers"

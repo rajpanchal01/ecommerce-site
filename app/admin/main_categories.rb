@@ -1,5 +1,5 @@
 ActiveAdmin.register MainCategory do
-  permit_params :name,:about
+  permit_params :name,:about,:image
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
