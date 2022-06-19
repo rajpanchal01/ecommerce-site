@@ -10,13 +10,14 @@ Rails.application.routes.draw do
       resources :inventories
       resources :products
       resources :sub_categories
-      resources :users, only: [:create]
+      resources :users, only: [:create,:index]
       post "/login", to: "users#login"
       resources :order_items
       resources :orders
       resources :cart_items
       resources :carts
       resources :user_addresses
+      resources :reviews
     end
   end
 

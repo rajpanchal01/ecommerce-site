@@ -4,5 +4,5 @@ class User < ApplicationRecord
     has_one :cart
     has_many :user_addresses
     has_many :payments
-    # has_many :reviews
+    has_many :reviews
 end

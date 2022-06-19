@@ -5,7 +5,11 @@ module Api
           
             # GET /user_addresses
             def index
-              @user_addresses = UserAddress.all
+                if params[:user_id]
+                    @user_addresses=UserAddress.where(user_id: params[:user_id])
+                else
+                  @user_addresses = UserAddress.all
+                end
           
               render json: @user_addresses
             end
@@ -48,7 +52,7 @@ module Api
           
               # Only allow a list of trusted parameters through.
               def user_address_params
-                params.permit(:address_line1, :address_line2, :city, :country, :postal_code, :mobile_no)
+                params.permit(:address_line1, :address_line2, :city, :country, :postal_code, :mobile_no,:user_id)
               end
           end
     end

@@ -48,7 +48,7 @@ module Api
   
           # Only allow a list of trusted parameters through.
           def payment_params
-            params.permit(:amount, :status)
+            params.permit(:amount, :status,:order_id,:user_id)
           end
       end
     end 
