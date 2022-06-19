@@ -1,6 +1,6 @@
 module Api
     module V1
-      class InventoriesController < ApplicationController
+      class InventoriesController < ApiController
 
         def index
           @inventories = Inventory.order('created_at DESC')

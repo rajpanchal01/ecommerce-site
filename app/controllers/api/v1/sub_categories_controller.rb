@@ -1,6 +1,6 @@
 module Api
     module V1
-      class SubCategoriesController < ApplicationController
+      class SubCategoriesController < ApiController
 
         def index
           if params[:main_category_id]

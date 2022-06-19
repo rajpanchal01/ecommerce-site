@@ -1,6 +1,6 @@
 module Api
     module V1
-      class BrandsController < ApplicationController
+      class BrandsController < ApiController
 
         def index
           @brands = Brand.order('created_at DESC')

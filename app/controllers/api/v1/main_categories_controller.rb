@@ -1,6 +1,6 @@
 module Api
     module V1
-      class MainCategoriesController < ApplicationController
+      class MainCategoriesController < ApiController
 
         def index
           @categories = MainCategory.order('created_at DESC')
