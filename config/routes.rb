@@ -12,6 +12,11 @@ Rails.application.routes.draw do
       resources :sub_categories
       resources :users, only: [:create]
       post "/login", to: "users#login"
+      resources :order_items
+      resources :orders
+      resources :cart_items
+      resources :carts
+      resources :user_addresses
     end
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_19_141414) do
+ActiveRecord::Schema.define(version: 2022_06_19_180607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,17 @@ ActiveRecord::Schema.define(version: 2022_06_19_141414) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "cart_items", force: :cascade do |t|
+    t.string "item_quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "carts", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "inventories", force: :cascade do |t|
     t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
@@ -58,6 +69,25 @@ ActiveRecord::Schema.define(version: 2022_06_19_141414) do
   create_table "main_categories", force: :cascade do |t|
     t.string "name"
     t.text "about"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.string "quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "total_amount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.string "amount"
+    t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -80,6 +110,17 @@ ActiveRecord::Schema.define(version: 2022_06_19_141414) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "main_category_id"
     t.index ["main_category_id"], name: "index_sub_categories_on_main_category_id"
+  end
+
+  create_table "user_addresses", force: :cascade do |t|
+    t.string "address_line1"
+    t.string "address_line2"
+    t.string "city"
+    t.string "country"
+    t.string "postal_code"
+    t.string "mobile_no"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
