@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_19_122532) do
+ActiveRecord::Schema.define(version: 2022_06_19_124858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,4 +41,49 @@ ActiveRecord::Schema.define(version: 2022_06_19_122532) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "brands", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "inventories", force: :cascade do |t|
+    t.integer "quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "product_id"
+    t.index ["product_id"], name: "index_inventories_on_product_id"
+  end
+
+  create_table "main_categories", force: :cascade do |t|
+    t.string "name"
+    t.text "about"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "price"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "sub_category_id"
+    t.bigint "brand_id"
+    t.index ["brand_id"], name: "index_products_on_brand_id"
+    t.index ["sub_category_id"], name: "index_products_on_sub_category_id"
+  end
+
+  create_table "sub_categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "main_category_id"
+    t.index ["main_category_id"], name: "index_sub_categories_on_main_category_id"
+  end
+
+  add_foreign_key "inventories", "products"
+  add_foreign_key "products", "brands"
+  add_foreign_key "products", "sub_categories"
+  add_foreign_key "sub_categories", "main_categories"
 end
