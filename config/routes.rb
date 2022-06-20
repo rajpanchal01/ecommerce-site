@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :discount_items
+  resources :discounts
   # resources :brands
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -10,6 +12,10 @@ Rails.application.routes.draw do
       resources :inventories
       resources :products
       resources :sub_categories
+      resources :orders
+      resources :cart_items
+      resources :carts
+      resources :user_addresses
       resources :users, only: [:create,:index]
       post "/login", to: "users#login"
       resources :order_items
@@ -17,9 +23,12 @@ Rails.application.routes.draw do
       resources :cart_items
       resources :carts
       resources :user_addresses
+      resources :payments
       resources :reviews
       resources :wishlists
       resources :wishlist_items
+      resources :discounts
+      resources :discount_items
     end
   end
 
