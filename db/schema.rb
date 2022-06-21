@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_21_055253) do
+ActiveRecord::Schema.define(version: 2022_06_21_071540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -181,6 +181,16 @@ ActiveRecord::Schema.define(version: 2022_06_21_055253) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  create_table "sellers", force: :cascade do |t|
+    t.bigint "gst_id", null: false
+    t.bigint "pan_id", null: false
+    t.string "seller_location"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_sellers_on_user_id"
+  end
+
   create_table "sub_categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -210,6 +220,7 @@ ActiveRecord::Schema.define(version: 2022_06_21_055253) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.bigint "mobile_number"
+    t.integer "status", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["mobile_number"], name: "index_users_on_mobile_number", unique: true
   end
@@ -242,6 +253,7 @@ ActiveRecord::Schema.define(version: 2022_06_21_055253) do
   add_foreign_key "products", "sub_categories"
   add_foreign_key "reviews", "products"
   add_foreign_key "reviews", "users"
+  add_foreign_key "sellers", "users"
   add_foreign_key "sub_categories", "main_categories"
   add_foreign_key "user_addresses", "users"
 end

@@ -44,3 +44,4 @@ gem "activeadmin"
 gem 'sass-rails'
 gem 'devise'
 gem "active_model_serializers"
+gem 'pg_search'

@@ -18,6 +18,8 @@ Rails.application.routes.draw do
       resources :user_addresses
       resources :users, only: [:create,:index]
       post "/login", to: "users#login"
+      get "/search", to: "products#search"
+      get "/rating", to: "products#rating"
       resources :order_items
       resources :orders
       resources :cart_items
@@ -29,6 +31,7 @@ Rails.application.routes.draw do
       resources :wishlist_items
       resources :discounts
       resources :discount_items
+      resources :sellers
     end
   end
 
