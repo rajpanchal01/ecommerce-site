@@ -3,7 +3,14 @@ module Api
       class ProductsController < ApiController
 
         def index
+          if params[:sub_category_id]
+            @products=Product.where(sub_category_id: params[:sub_category_id])
+          elsif params[:sub_category]
+            @name=SubCategory.find_by(name: params[:sub_category])
+            @products=Product.where(sub_category_id: @name.id)
+          else
           @products = Product.order('created_at DESC')
+          end
           render json: @products,status: 'SUCCESS', message: 'Loaded Products', status: :ok
         end
 
