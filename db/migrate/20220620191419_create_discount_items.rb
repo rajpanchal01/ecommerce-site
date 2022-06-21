@@ -1,4 +1,4 @@
-class CreateDiscountItems < ActiveRecord::Migration[7.0]
+class CreateDiscountItems < ActiveRecord::Migration[6.1]
   def change
     create_table :discount_items do |t|
 
