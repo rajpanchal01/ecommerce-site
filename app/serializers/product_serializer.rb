@@ -5,3 +5,4 @@ class ProductSerializer < ActiveModel::Serializer
   # def url
   #   Rails.application.routes.url_helpers.url_for(product_url(object))
   # end
+end

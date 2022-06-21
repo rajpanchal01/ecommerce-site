@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :discount_items
-  resources :discounts
+  # resources :discount_items
+  # resources :discounts
   # resources :brands
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
