@@ -3,7 +3,12 @@ module Api
       class DiscountsController < ApiController
 
         def index
-          @discounts = Discount.order('created_at DESC')
+          #@discounts = Discount.order('created_at DESC')
+          if params[:offer_type]
+            @discount_items=DiscountItem.joins(:discount).order("offer_dicount").where(discounts: { offer_type: params[:offer_type] })
+          else
+            @discount_items = DiscountItem.order("created_at DESC")
+          end
           render json: @discounts, status: :ok
         end
 

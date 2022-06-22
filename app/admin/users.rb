@@ -5,14 +5,17 @@ ActiveAdmin.register User do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :email, :name, :mobile_number
+  permit_params :email, :name, :mobile_number,:status
   #
   # or
   #
   permit_params do
-    permitted = [:email,:name, :mobile_number]
+    permitted = [:status]
     permitted << :other if params[:action] == 'create' && current_user.admin?
     permitted
+  end
+  action_item :view, only: :show do
+    link_to 'Approve as seller', api_v1_set_seller_path(params[:id]) 
   end
   
 end

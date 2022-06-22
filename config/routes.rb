@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       get "/search", to: "products#search"
       get "/rating", to: "products#rating"
       get "/verify", to: "users#verify"
+      get "/set_seller", to: "users#set_seller"
       resources :order_items
       resources :orders
       resources :cart_items
