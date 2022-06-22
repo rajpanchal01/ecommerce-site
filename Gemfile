@@ -45,3 +45,4 @@ gem 'sass-rails'
 gem 'devise'
 gem "active_model_serializers"
 gem 'pg_search'
+gem "aws-sdk-s3", require: false
