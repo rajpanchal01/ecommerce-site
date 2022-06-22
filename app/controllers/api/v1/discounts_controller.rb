@@ -6,10 +6,11 @@ module Api
           #@discounts = Discount.order('created_at DESC')
           if params[:offer_type]
             @discount_items=DiscountItem.joins(:discount).order("offer_dicount").where(discounts: { offer_type: params[:offer_type] })
+            render json: @discount_items, status: :ok
           else
-            @discount_items = DiscountItem.order("created_at DESC")
+            @discounts = Discount.order("created_at DESC")
+            render json: @discounts, status: :ok
           end
-          render json: @discounts, status: :ok
         end
 
         def show
@@ -46,7 +47,7 @@ module Api
 
         private
           def discount_params
-            params.permit(:name,:start_date,:end_date,:offer_type,:offer_dicount,:slider)
+            params.permit(:name,:start_date,:end_date,:offer_type,:offer_dicount,posters: [])
           end
 
       end
