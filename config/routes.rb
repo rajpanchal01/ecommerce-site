@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       post "/login", to: "users#login"
       get "/search", to: "products#search"
       get "/rating", to: "products#rating"
+      get "/verify", to: "users#verify"
       resources :order_items
       resources :orders
       resources :cart_items
