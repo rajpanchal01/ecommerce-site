@@ -26,7 +26,7 @@ module Api
             # action_item :approve, only: :index do
             #     link_to "Approve", some_path
             #   end
-            User.find(params[:user_id]).update_attribute(:status,1)
+            #User.find(params[:user_id]).update_attribute(:status,1)
             render json: @seller, status: :created
           else
             render json: @seller.errors, status: :unprocessable_entity

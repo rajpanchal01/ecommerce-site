@@ -53,6 +53,10 @@ module Api
                     end
                 end
             end
+            def set_seller
+                p params
+                User.find(params[:format]).update(status: 1)
+            end
             def logout
 
             end
