@@ -3,18 +3,20 @@ module Api
       class ProductsController < ApiController
 
         def index
+          @products=Product.all
           if params[:sub_category_id]
-            @products=Product.where(sub_category_id: params[:sub_category_id])
-          elsif params[:sub_category]
+            @products=@products.where(sub_category_id: params[:sub_category_id])
+          end
+          if params[:sub_category]
             @name=SubCategory.find_by(name: params[:sub_category])
-            @products=Product.where(sub_category_id: @name.id)
-          elsif params[:brand_id]
-            @products=Product.where(brand_id: params[:brand_id])
-          elsif params[:brand]
+            @products=@products.where(sub_category_id: @name.id)
+          end
+          if params[:brand_id]
+            @products=@products.where(brand_id: params[:brand_id])
+          end
+          if params[:brand]
             @name=Brand.find_by(name: params[:brand])
-            @products=Product.where(brand_id: @name.id)
-          else
-          @products = Product.order('created_at DESC')
+            @products=@products.where(brand_id: @name.id)
           end
           render json: @products,status: 'SUCCESS', message: 'Loaded Products', status: :ok
         end
@@ -38,7 +40,8 @@ module Api
 
         def create
           @product = Product.new(product_params)
-         # p @product.posters
+          p @product
+          # p @product.posters
           if @product.save
             render json: @product, status: :ok
           else
@@ -65,7 +68,7 @@ module Api
 
         private
           def product_params
-            params.permit(:name, :description,:price,:sub_category_id,:brand_id, posters: [])
+            params.permit(:name, :description,:price,:sub_category_id,:brand_id,:seller_id, posters: [])
           end
 
       end
