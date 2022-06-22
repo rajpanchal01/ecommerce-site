@@ -5,11 +5,9 @@ module Api
 
         # GET /orders
         def index
+          @sellers = Seller.all
           if params[:user_id]
-            @sellers= Seller.where(user_id: params[:user_id])
-          else
-            @sellers = Seller.all
-
+            @sellers= @sellers.where(user_id: params[:user_id])
           end
             render json: @sellers
 

@@ -4,6 +4,9 @@ module Api
 
         def index
           @products=Product.all
+          if params[:seller_id]
+            @products=@products.where(seller_id: params[:seller_id])
+          end
           if params[:sub_category_id]
             @products=@products.where(sub_category_id: params[:sub_category_id])
           end
@@ -43,6 +46,7 @@ module Api
           p @product
           # p @product.posters
           if @product.save
+            Inventory.create!(product_id: @product.id)
             render json: @product, status: :ok
           else
             render json: {status: 'Error', message: 'Product is not saved', data:@product.errors}, status: :unprocessable_entity
