@@ -2,7 +2,7 @@ module Api
     module V1
       class ReviewsController < ApiController
       before_action :set_review, only: %i[ show update destroy ]
-      before_action :set_user_id, only: %i[ create update destroy ]
+      #before_action :set_user_id, only: %i[ create update destroy ]
       # GET /reviews
       def index
         if params[:product_id] && params[:user_id]

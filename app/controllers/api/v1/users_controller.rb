@@ -2,7 +2,7 @@ module Api
     module V1
 
         class UsersController < ApiController
-            before_action :set_user_id only: %i[ verify ]
+        
             def index
                 @users = User.all
                 render json: {data: @users},status: :ok
@@ -44,15 +44,20 @@ module Api
                 end
             end
             def verify
-                if !isverified
+                #@user= User.find(params[:user_id])
+                @user=current_user
                     if UserOtp.find_by(otp: params[:otp])
-                        if current_user.id ==UserOtp.find_by(otp: params[:otp]).user_id
-                            current_user.update_attribute(:is_varified,1)
-                            UserOtp.find_by(user_id: current_user.id).destroy
+                        if @user.id ==UserOtp.find_by(otp: params[:otp]).user_id
+                            @user.update_attribute(:is_varified,1)
+                            UserOtp.find_by(user_id: @user.id).destroy
                             render json: { masssage: "is_varified"}
+                        else
+                            render json: { error: "wrong OTP"}
                         end
+                    else
+                        render json: { error: "wrong OTP"}
                     end
-                end
+                
             end
             def set_seller
                 #User.find(params[:format]).update(status: 1)
