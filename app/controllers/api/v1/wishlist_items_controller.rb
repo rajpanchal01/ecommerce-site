@@ -2,7 +2,7 @@ module Api
   module V1    
     class WishlistItemsController < ApiController
       before_action :set_wishlist_item, only: %i[ show update destroy ]
-
+      before_action :set_wishlist_id
       # GET /wishlist_items
       def index
         if params[:wishlist_id]
@@ -58,6 +58,10 @@ module Api
         # Only allow a list of trusted parameters through.
         def wishlist_item_params
           params.fetch(:wishlist_id,:product_id)
+        end
+        def set_wishlist_id
+          @wishlist= Wihdlist.find_by(user_id: current_user.id).id
+          params[:wishlist_id]=@wishlist
         end
     end
   end 

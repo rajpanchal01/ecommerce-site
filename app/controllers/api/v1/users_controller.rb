@@ -15,9 +15,9 @@ module Api
                     # if Cart.find_by(user_id: @user.id)
 
                     # else
-                     Cart.create(user_id: @user.id) unless !Cart.find_by(user_id: @user.id)
+                    Cart.create(user_id: @user.id) unless !Cart.find_by(user_id: @user.id)
                 
-
+                    Wishlist.create(user_id: @user.id) unless !Wishlist.find_by(user_id: @user.id)
                     @otp=rand.to_s[2..7]
                     UserOtp.create!(otp: @otp,user_id: @user.id)
                     UserMailer.new_user_otp_email.deliver_later
