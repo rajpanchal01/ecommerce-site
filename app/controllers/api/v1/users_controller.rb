@@ -16,9 +16,9 @@ module Api
                     # if Cart.find_by(user_id: @user.id)
 
                     # else
-                    Cart.create(user_id: @user.id) unless !Cart.find_by(user_id: @user.id)
+                    Cart.create(user_id: @user.id) if !Cart.find_by(user_id: @user.id)
                 
-                    Wishlist.create(user_id: @user.id) unless !Wishlist.find_by(user_id: @user.id)
+                    Wishlist.create(user_id: @user.id) if !Wishlist.find_by(user_id: @user.id)
                     @otp=rand.to_s[2..7]
                     UserOtp.create!(otp: @otp,user_id: @user.id)
                     UserMailer.with(mail: @user).new_user_otp_email.deliver_later
@@ -55,8 +55,8 @@ module Api
                 end
             end
             def set_seller
-                p params
-                User.find(params[:format]).update(status: 1)
+                #User.find(params[:format]).update(status: 1)
+                Seller.find_by(user_id: User.find(params[:format]).id).update_attribute(:status,1)
             end
             def logout
 
