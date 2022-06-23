@@ -2,9 +2,9 @@ class Discount < ApplicationRecord
     has_many :discount_items
     validates :offer_type, :inclusion => ["direct","cashback"]
     has_many_attached :posters
-    # def slider_url
-    #     Rails.application.routes.url_helpers.url_for(slider)
-    # end
+    def slider_url
+        Rails.application.routes.url_helpers.url_for(image) if object.attached? :image
+    end
     def poster_urls
         #   poster_urls=[]
          #  posters.each do |p|

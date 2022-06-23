@@ -5,7 +5,9 @@ class UserMailer < ApplicationMailer
         mail(to:"kristalmehta10@gmail.com" , subject: "You got a new order!")
       end
       def new_user_otp_email
-        @otp = UserOtp.last.otp
-        mail(to: "rajpanchal2810@gmail.com" , subject: "Welcome to Our world!")
+        @user=params[:mail]
+        @otp = UserOtp.find_by(user_id: @user.id).otp
+        @user.email 
+        mail(to: @user.email , subject: "Welcome to Our world!")
       end
 end
