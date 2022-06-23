@@ -2,7 +2,8 @@ module Api
     module V1
         class CartItemsController < ApiController
     before_action :set_cart_item, only: %i[ show update destroy ]
-  
+    before_action :set_cart_id
+    before_action :set_item_quantity
     # GET /cart_items
     def index
         if params[:cart_id]
@@ -64,6 +65,12 @@ module Api
       # Only allow a list of trusted parameters through.
       def cart_item_params
         params.permit(:item_quantity,:cart_id,:product_id)
+      end
+      def set_cart_id
+        params[:cart_id]=Cart.find_by(user_id: current_user.id).id
+      end
+      def set_item_quantity
+        params[:item_quantity]=1
       end
   end
 end
