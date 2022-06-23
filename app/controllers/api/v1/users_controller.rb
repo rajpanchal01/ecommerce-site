@@ -2,6 +2,7 @@ module Api
     module V1
 
         class UsersController < ApiController
+            before_action :set_user_id only: %i[ verify ]
             def index
                 @users = User.all
                 render json: {data: @users},status: :ok
@@ -20,7 +21,7 @@ module Api
                     Wishlist.create(user_id: @user.id) if !Wishlist.find_by(user_id: @user.id)
                     @otp=rand.to_s[2..7]
                     UserOtp.create!(otp: @otp,user_id: @user.id)
-                    UserMailer.new_user_otp_email.deliver_later
+                    UserMailer.with(mail: @user).new_user_otp_email.deliver_later
                     if @user.valid?
                         token = encode_token({user_id: @user.id})
                         render json:  {user: @user,token: token}, status: :ok
@@ -63,6 +64,9 @@ module Api
             private
             def user_params
                 params.permit(:email,:password,:name,:mobile_number)
+            end
+            def set_user_id
+                params[:user_id]=current_user.id
             end
         end
     end
