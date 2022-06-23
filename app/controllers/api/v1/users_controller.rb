@@ -2,6 +2,7 @@ module Api
     module V1
 
         class UsersController < ApiController
+            before_action :set_user_id only: %i[ verify ]
             def index
                 @users = User.all
                 render json: {data: @users},status: :ok
@@ -63,6 +64,9 @@ module Api
             private
             def user_params
                 params.permit(:email,:password,:name,:mobile_number)
+            end
+            def set_user_id
+                params[:user_id]=current_user.id
             end
         end
     end

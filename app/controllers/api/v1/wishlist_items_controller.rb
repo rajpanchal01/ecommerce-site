@@ -59,8 +59,7 @@ module Api
           params.permit(:wishlist_id,:product_id)
         end
         def set_wishlist_id
-          @wishlist= Wihdlist.find_by(user_id: current_user.id).id
-          params[:wishlist_id]=@wishlist
+          params[:wishlist_id]=Widhlist.find_by(user_id: current_user.id).id
         end
     end
   end 
