@@ -2,7 +2,7 @@ module Api
     module V1
     class OrdersController < ApiController
             before_action :set_order, only: %i[ show update destroy ]
-            before_action :set_user_id,only: %i[ show create ]
+            #before_action :set_user_id,only: %i[ show create ]
             # GET /orders
             def index
                 if params[:user_id]
@@ -21,9 +21,9 @@ module Api
         
             # POST /orders
             def create
-                if @order = Order.save(order_params) # this will save the order 
+                if @order = Order.create!(order_params) # this will save the order 
 
-                    current_user.cart.cart_items.each do |cart_item|
+                      current_user.cart.cart_items.each do |cart_item|
                        # using the bang (!) to save to the DB and raise any errors
                        # rather than failing silently
                        @order_item=@order.order_items.create!(         
@@ -31,8 +31,10 @@ module Api
                           quantity:   cart_item.item_quantity 
                        )
                        quantity_drop=@order_item.quantity
+                       q=Product.find(@order_item.product.id).quantity
+                       a=q-quantity_drop
                        # @order_item.product.id
-                       Inventory.find_by(product_id: @order_item.product.id).decrement!(:quantity,quantity_drop.to_i )
+                       Product.find(@order_item.product.id).update(quantity: a )
                        end
                        #delete from cart
                     current_user.cart.cart_items.destroy_all

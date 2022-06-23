@@ -2,7 +2,7 @@ module Api
     module V1
         class CartItemsController < ApiController
     before_action :set_cart_item, only: %i[ show update destroy ]
-    before_action :set_cart_id
+    #before_action :set_cart_id
     before_action :set_item_quantity
     # GET /cart_items
     def index
