@@ -2,14 +2,14 @@ module Api
     module V1    
       class CartsController < ApiController
         before_action :set_cart, only: %i[ show update destroy ]
-        before_action :set_user_id
+        before_action :set_user_id, only: %i[  update destroy ]
         # GET /carts
         def index
-          #UserMailer.new_order_email.deliver_later
-          if params[:user_id]
-              @carts = Cart.where(user_id: params[:user_id])
+          
+          if current_user
+              @carts = Cart.where(user_id: current_user.id)
           else
-            @carts = Cart.all
+            render json: {masssage: "you have to log in"}
           end
           render json: @carts
         end

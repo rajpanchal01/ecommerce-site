@@ -21,7 +21,5 @@ class Product < ApplicationRecord
     def average_rating
         reviews.average(:rating)
     end
-    def discount
-        discount_item.discount if discount_item
-    end
+    
 end

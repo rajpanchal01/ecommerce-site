@@ -3,7 +3,7 @@ module Api
       class ProductsController < ApiController
 
         def index
-          @products=Product.all
+          @products=Product.all.order("discount DESC")
           if params[:seller_id]
             @products=@products.where(seller_id: params[:seller_id])
           end
@@ -72,7 +72,7 @@ module Api
 
         private
           def product_params
-            params.permit(:name, :description,:price,:sub_category_id,:brand_id,:seller_id,:discount, posters: [])
+            params.permit(:name, :description,:price,:sub_category_id,:brand_id,:seller_id,:discount,:quantity, posters: [])
           end
 
       end
