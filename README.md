@@ -17,8 +17,9 @@ Things you may want to cover:
 
 * Services (job queues, cache servers, search engines, etc.)
 
-*About this app:
+* About this app:
 -This is backend api for ecoomerce website built in rails 6.1 and ruby 3.0.
+
 -Admin panel is deployed on backend side via activeadmin
 
 
