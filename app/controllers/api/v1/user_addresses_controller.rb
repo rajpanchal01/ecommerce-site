@@ -2,7 +2,7 @@ module Api
     module V1
         class UserAddressesController < ApiController
             before_action :set_user_address, only: %i[ show update destroy ]
-            #before_action :set_user_id, only: %i[ create update destroy ]
+            before_action :set_user_id, only: %i[ create update destroy ]
             #before_action :authorize
             # GET /user_addresses
             def index
