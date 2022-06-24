@@ -24,12 +24,9 @@ module Api
     def create
         @cart_item=CartItem.where(cart_id: params[:cart_id],product_id: params[:product_id])
         if @cart_item!=[]
-          #x=@cart_item[:item_quantity]
+          
           @cart_item[0].increment!(:item_quantity, 1)
-          #p @cart_item[0].item_quantity
-          #@cart_item.update_attributes(item_quantity: @cart_item[0].item_quantity+1)
-          #puts CartItem.find(@cart_item)
-          #@cart_item.update_attribute(:items_quanity, @cart_item +=1 )
+        
           render json: @cart_item , status: :ok
         else
             @cart_item = CartItem.new(cart_item_params)

@@ -2,7 +2,7 @@ module Api
     module V1
       class SellersController < ApiController
         before_action :set_seller, only: %i[ show update destroy ]
-
+        before_action :set_user_id
         # GET /orders
         def index
           @sellers = Seller.all
@@ -56,6 +56,9 @@ module Api
           # Only allow a list of trusted parameters through.
           def seller_params
             params.permit(:user_id,:gst_id,:pan_id,:seller_location)
+          end
+          def set_user_id
+            params[:user_id]=current_user.id
           end
       end
     end
