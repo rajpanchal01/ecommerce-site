@@ -5,20 +5,20 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version 3.0.0
 
-* System dependencies
+* System dependencies : database :postgresql
 
-* Configuration
+* Configuration : rails 6.1.0
 
-* Database creation
+* Database creation :rails db:create
 
-* Database initialization
-
-* How to run the test suite
+* Database initialization :rails db:migrate
 
 * Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+*About this app:
+-This is backend api for ecoomerce website built in rails 6.1 and ruby 3.0.
+-Admin panel is deployed on backend side via activeadmin
 
-* ...
+
